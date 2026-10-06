@@ -3,7 +3,7 @@
 import time
 
 from config.config import INPUT_DIR
-from queue.queue_manager import add_job, queue_size
+from job_queue.queue_manager import add_job, queue_size
 from scaling.autoscaler import AutoScaler
 
 
