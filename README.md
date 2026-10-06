@@ -1,6 +1,6 @@
 # Scalable Cloud Video Processing with Automatic Scaling and Fault Recovery
 
-Capstone project implementing a cloud-based video processing system using Python and AWS.
+Capstone project implementing a cloud-based video processing system using Python,ffmpeg and AWS.
 
 ## Overview
 
