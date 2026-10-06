@@ -22,4 +22,4 @@ Video Files → Queue → Multiple Workers → Processed Videos
 - Aaron Mathews Molayal — Technical Lead / Cloud Engineer
 - Tuan Minh — Backend & Reliability
 - Hayyan Mohammad — Performance & Evaluation
-- Chalisa — Project & Documentation Coordinator
+- Chalisa — Web Interface & Documentation
