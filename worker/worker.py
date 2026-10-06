@@ -2,7 +2,7 @@
 
 import threading
 
-from queue.queue_manager import (
+from job_queue.queue_manager import (
     get_job,
     complete_job
 )
