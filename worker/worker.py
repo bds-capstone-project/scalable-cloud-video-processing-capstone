@@ -40,7 +40,7 @@ class VideoWorker(threading.Thread):
 
                 print(
                     f"[WORKER-{self.worker_id}] "
-                    f"Completed → {output.name}"
+                    f"Completed -> {output.name}"
                 )
 
             except Exception as error:
