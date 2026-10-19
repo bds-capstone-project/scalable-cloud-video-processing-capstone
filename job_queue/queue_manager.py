@@ -1,3 +1,5 @@
+
+
 from queue import Queue
 
 job_queue = Queue()
@@ -15,6 +17,8 @@ def get_job():
 def complete_job():
     job_queue.task_done()
 
+def wait_for_all_jobs():
+    job_queue.join()
 
 def queue_size():
     return job_queue.qsize()
