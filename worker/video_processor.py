@@ -5,6 +5,7 @@ from pathlib import Path
 
 
 def process_video(input_path, output_dir):
+    #runs ffmpeg, resize to 720p,compress,outputs
     input_path = Path(input_path)
     output_dir = Path(output_dir)
 
