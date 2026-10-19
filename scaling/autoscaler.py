@@ -1,3 +1,5 @@
+
+
 from worker.worker import VideoWorker
 
 from config.config import (
@@ -17,21 +19,20 @@ class AutoScaler:
             self.add_worker()
 
     def add_worker(self):
-
         if len(self.workers) >= MAX_WORKERS:
             return
 
         self.worker_counter += 1
-
         worker = VideoWorker(self.worker_counter)
-        worker.start()
 
         self.workers.append(worker)
 
         print(
-            f"[AUTOSCALER] Scale UP → "
+            f"[AUTOSCALER] Scale UP ->"
             f"{len(self.workers)} workers"
         )
+
+        worker.start()
 
     def evaluate(self, queue_size):
 
