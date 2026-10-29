@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloud Video Processor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <p class="eyebrow">DISTRIBUTED VIDEO PROCESSING</p>
+      <h1>Cloud Video Processor</h1>
+      <p class="intro">Convert multiple MP4 videos to 720p using scalable cloud workers.</p>
+    </header>
+
+    <section class="upload-section" aria-labelledby="upload-heading">
+      <div class="section-heading"><h2 id="upload-heading">Upload videos</h2><span class="section-meta">MP4 only</span></div>
+      <form id="upload-form">
+        <div id="drop-zone" class="drop-zone">
+          <input id="video" class="file-input" type="file" accept="video/mp4,.mp4" multiple aria-label="Select MP4 videos">
+          <label for="video" class="drop-label">
+            <span class="drop-heading">Drop MP4 files here, or <span class="browse">browse files</span></span>
+            <span class="drop-subtext">Select multiple videos to process as a batch</span>
+          </label>
+        </div>
+        <div class="form-actions"><span id="selection-summary" class="selection-summary" aria-live="polite">No files selected</span><button id="submit" type="submit" disabled>Upload videos</button></div>
+      </form>
+    </section>
+
+    <section class="queue-section" aria-labelledby="queue-heading">
+      <div class="section-heading"><h2 id="queue-heading">Videos <span id="file-count" class="count">0</span></h2><button type="button" id="clear-list" class="text-button" hidden>Clear finished</button></div>
+      <div class="list-head" aria-hidden="true"><span>FILE</span><span>SIZE</span><span>STATUS</span><span></span></div>
+      <div id="video-list" class="video-list" aria-live="polite"><p class="empty-state">Selected videos will appear here.</p></div>
+      <p id="notice" class="notice" role="status"></p>
+    </section>
+    <footer>Powered by AWS S3, SQS and EC2 · Video conversion to 720p MP4</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
