@@ -1,0 +1,42 @@
+#!/bin/bash
+set -euxo pipefail
+
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update
+apt-get install -y python3 python3-venv ffmpeg
+
+mkdir -p /opt/capstone
+python3 -m venv /opt/capstone/venv
+/opt/capstone/venv/bin/pip install boto3
+
+# Create the worker service before attempting the S3 download.
+cat > /etc/systemd/system/capstone-worker.service <<'EOF'
+[Unit]
+Description=Capstone SQS Video Processing Worker
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+Environment=AWS_REGION=us-east-1
+Environment=VIDEO_BUCKET=bds-capstone-video-processing-2026
+Environment=VIDEO_QUEUE=bds-capstone-queue
+
+# Download worker code before starting.
+# If S3 temporarily returns 403, systemd retries the service.
+ExecStartPre=/opt/capstone/venv/bin/python -c "import boto3; boto3.client('s3', region_name='us-east-1').download_file('bds-capstone-video-processing-2026', 'code/aws_worker.py', '/opt/capstone/aws_worker.py')"
+
+ExecStart=/opt/capstone/venv/bin/python /opt/capstone/aws_worker.py
+
+Restart=always
+RestartSec=30
+TimeoutStopSec=600
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable --now capstone-worker
